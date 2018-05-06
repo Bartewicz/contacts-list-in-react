@@ -3,9 +3,6 @@ import Contact from './Contact'
 
 const List = ({ contactsList, deleteContactFunction }) => (
   <div>
-    <h1>
-      Welcome to your contacts list!
-    </h1>
     {
       contactsList.map(contact => (
         <Contact
