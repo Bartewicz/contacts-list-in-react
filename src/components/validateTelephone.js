@@ -1,6 +1,4 @@
-import React from 'react'
-
-const validateTelephone = (number) => {
+export default  (number) => {
   if (
     number.split('').filter(el =>
       el === '('
@@ -35,5 +33,3 @@ const validateTelephone = (number) => {
     return false
   }
 }
-
-export default validateTelephone
