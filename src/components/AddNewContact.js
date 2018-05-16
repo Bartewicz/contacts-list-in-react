@@ -1,42 +1,65 @@
 import React from 'react'
+
+import Snackbar from 'material-ui/Snackbar'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
 import PaperRedefined from './UI/PaperRedefined'
 
-const AddNewContact = ({ nameHandler, telephoneHandler, emailHandler, newName, newTelephone, newEmail, clickHandler }) => (
-  <PaperRedefined>
-    <TextField
-      onChange={nameHandler}
-      name={'contacts-name'}
-      hintText=''
-      floatingLabelText="Name"
-      fullWidth={true}
-      value={newName}
-    />
-    <TextField
-      onChange={telephoneHandler}
-      name={'contacts-name'}
-      hintText=''
-      floatingLabelText="Telephone"
-      fullWidth={true}
-      value={newTelephone}
-    />
-    <TextField
-      onChange={emailHandler}
-      name={'contacts-name'}
-      hintText=''
-      floatingLabelText="Email"
-      fullWidth={true}
-      value={newEmail}
-    />
-    <RaisedButton
-      onClick={clickHandler}
-      primary={true}
-      fullWidth={true}
-      label={'ADD'}
-    />
-  </PaperRedefined>
-)
+class AddNewContact extends React.Component {
+  state = {
+    isSnackbarOpen: false
+  }
 
-export default AddNewContact
+  toggleSnackbar = (callback) => {
+    this.setState({
+      isSnackbarOpen: !this.state.isSnackbarOpen,
+    })
+  }
+
+  render() {
+    return (
+      <PaperRedefined>
+        <TextField
+          onChange={this.props.nameHandler}
+          name={'contacts-name'}
+          hintText='Type name of your contact'
+          floatingLabelText="Name"
+          fullWidth={true}
+          value={this.props.newName}
+        />
+        <TextField
+          onChange={this.props.telephoneHandler}
+          name={'contacts-name'}
+          hintText='Type telephone number'
+          floatingLabelText="Telephone"
+          fullWidth={true}
+          type='tel'
+          value={this.props.newTelephone}
+        />
+        <TextField
+          onChange={this.props.emailHandler}
+          name={'contacts-name'}
+          hintText='Type email address'
+          floatingLabelText="Email"
+          fullWidth={true}
+          value={this.props.newEmail}
+        />
+        <RaisedButton
+          onClick={() => { this.props.addContact(this.toggleSnackbar) }}
+          primary={true}
+          fullWidth={true}
+          label={'ADD'}
+        />
+        <Snackbar
+          open={this.state.isSnackbarOpen}
+          message="Your contact has been added!"
+          autoHideDuration={4000}
+          onRequestClose={this.toggleSnackbar}
+        />
+      </PaperRedefined >
+    )
+  }
+}
+
+  export default AddNewContact

@@ -6,9 +6,9 @@ const styles = {
   }
 }
 
-const Header = () => (
+const Header = (props) => (
   <h1 style={styles.h1}>
-    Welcome to your contacts list!
+    {props.children}
   </h1>
 )
 

@@ -1,16 +1,16 @@
 import React from 'react'
 import Contact from './Contact'
 
-const List = ({ contactsList, deleteContactFunction }) => (
+const List = (props) => (
   <div>
     {
-      contactsList.map(contact => (
+      props.contactsList.map(contact => (
         <Contact
           name={contact.name}
           telephone={contact.telephone}
           email={contact.email}
           key={contact.key}
-          deleteContact={() => deleteContactFunction(contact.key)}
+          deleteContact={() => props.deleteContactFunction(contact.key)}
         />
       ))
     }
