@@ -43,23 +43,26 @@ class App extends React.Component {
       !this.state.newContactTelephone ?
         alert('A telephone number is required')
         :
-        !validateTelephone(this.state.newContactTelephone) ?
-          alert('Only an integer, dash or parentheses are available in telephone number field')
+        this.state.newContactTelephone.length < 3 ?
+          alert('A telephone number must be at least 3 character long')
           :
-          !this.state.newContactEmail ?
-            alert('An email address is required')
+          !validateTelephone(this.state.newContactTelephone) ?
+            alert('Only an integer, dash or parentheses are available in telephone number field')
             :
-            !this.state.newContactEmail.includes('@') ?
-              alert('Incorrect email address')
+            !this.state.newContactEmail ?
+              alert('An email address is required')
               :
-              this.state.newContactEmail
-                .slice(-4, -2)
-                .split('')
-                .filter(el => el === '.')
-                .length !== 1 ?
+              !this.state.newContactEmail.includes('@') ?
                 alert('Incorrect email address')
                 :
-                this.addContact(callback)
+                this.state.newContactEmail
+                  .slice(-4, -2)
+                  .split('')
+                  .filter(el => el === '.')
+                  .length !== 1 ?
+                  alert('Incorrect email address')
+                  :
+                  this.addContact(callback)
   }
 
   addContact = () => {
